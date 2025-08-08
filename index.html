@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pasta Guessing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+    }
+    h1 {
+      color: #8B0000;
+    }
+    .image-box {
+      margin-bottom: 20px;
+    }
+    img {
+      width: 300px;
+      display: block;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      width: 300px;
+      margin-bottom: 20px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    .team-buttons button {
+      margin: 5px;
+    }
+    .clue-box {
+      margin-top: 20px;
+      padding: 10px;
+      background: #fff3cd;
+      border-left: 5px solid #ffc107;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Atpazīsti pastu</h1>
+  <form id="gameForm">
+    <div class="image-box">
+      <img src="Penne.PNG" alt="Penne">
+      <input type="text" placeholder="Type the name of this pasta" data-answer="Penne">
+    </div>
+    <div class="image-box">
+      <img src="Farfalle.PNG" alt="Farfalle">
+      <input type="text" placeholder="Type the name of this pasta" data-answer="Farfalle">
+    </div>
+    <div class="image-box">
+      <img src="Fusilli.PNG" alt="Fusilli">
+      <input type="text" placeholder="Type the name of this pasta" data-answer="Fusilli">
+    </div>
+    <div class="image-box">
+      <img src="Lasagna.PNG" alt="Lasagna">
+      <input type="text" placeholder="Type the name of this pasta" data-answer="Lasagna">
+    </div>
+    <div class="image-box">
+      <img src="Macaroni.PNG" alt="Macaroni">
+      <input type="text" placeholder="Type the name of this pasta" data-answer="Macaroni">
+    </div>
+    <div class="image-box">
+      <img src="Spaghetti.PNG" alt="Spaghetti">
+      <input type="text" placeholder="Type the name of this pasta" data-answer="Spaghetti">
+    </div>
+    <button type="submit">Submit Answer</button>
+  </form>
+
+  <div id="teamSection" class="hidden">
+    <h2>Choose Your Team</h2>
+    <div class="team-buttons">
+  <button onclick="showClue('red')" style="color: red;">Sarkanā komanda</button>
+  <button onclick="showClue('blue')" style="color: blue;">Zilā komanda</button>
+  <button onclick="showClue('green')" style="color: green;">Zaļā komanda</button>
+  <button onclick="showClue('yellow')" style="color: goldenrod;">Dzeltenā komanda</button>
+</div>
+  </div>
+
+  <div id="clueBox" class="clue-box hidden"></div>
+
+  <script>
+    const form = document.getElementById('gameForm');
+    const teamSection = document.getElementById('teamSection');
+    const clueBox = document.getElementById('clueBox');
+
+    const clues = {
+      red: "🔴 Eccellente, Kapteinis priecājas par jūsu veiklo burtošanu! Vai varat atminēt nākamo ceļojuma pieturvietu?<br><br>" +
+       "Kur ābolmaize smaržo un mīļi tev smaida,<br>" +
+       "Kur tējas tase virtuvē gaida.<br>" +
+       "Ne skolā, ne darbā, ne veikalā lielā,<br>" +
+       "Bet pie omes uz mājām ved tavs ceļš."",
+      blue: "🔵 Eccellente, Kapteinis priecājas par jūsu veiklo burtošanu! Vai varat atminēt nākamo ceļojuma pieturvietu?<br><br>" +
+        "Te zeme ir cieta, bet tas nav betons,<br>" +
+        "Te sprintu skrien uz asmeņiem, ne zolēm,<br>" +
+        "Te nedejo valsi, bet cīnās kā zvēri.<br>" +
+        "Meklē vietu, kur ripa uz mērķi lido ātrāk kā vējš.",
+      green: "🟢 Eccellente, Kapteinis priecājas par jūsu veiklo burtošanu! Vai varat atminēt nākamo ceļojuma pieturvietu?<br><br>" +
+         "Te zeme ir cieta, bet tas nav betons,<br>" +
+         "Te sprintu skrien uz asmeņiem, ne zolēm,<br>" +
+         "Te nedejo valsi, bet cīnās kā zvēri.<br>" +
+         "Meklē vietu, kur ripa uz mērķi lido ātrāk kā vējš.",
+      yellow: "🟡🟢 Eccellente, Kapteinis priecājas par jūsu veiklo burtošanu! Vai varat atminēt nākamo ceļojuma pieturvietu?<br><br>" +
+         "Te zeme ir cieta, bet tas nav betons,<br>" +
+         "Te sprintu skrien uz asmeņiem, ne zolēm,<br>" +
+         "Te nedejo valsi, bet cīnās kā zvēri.<br>" +
+         "Meklē vietu, kur ripa uz mērķi lido ātrāk kā vējš."
+    };
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = form.querySelector('input');
+      const correctAnswer = input.dataset.answer.trim().toLowerCase();
+      const userAnswer = input.value.trim().toLowerCase();
+
+      if (userAnswer === correctAnswer) {
+        form.classList.add('hidden');
+        teamSection.classList.remove('hidden');
+      } else {
+        alert("Incorrect answer. Please try again!");
+      }
+    });
+
+    function showClue(color) {
+      clueBox.textContent = clues[color];
+      clueBox.classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
